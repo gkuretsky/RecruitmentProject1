@@ -1,10 +1,51 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="hero-card">
+    <p class="hero-eyebrow">Ole Miss &bull; Recruitment</p>
+    <h1 class="hero-title">Welcome!</h1>
+    <p class="hero-subtitle">
+        Welcome to your home base for everything Recruitment! This site allows you
+        to see all active information, allow you to create mock seating charts...
+    </p>
+    <p>
+        <a class="btn btn-belle me-2" asp-page="/SeatingChartGenerator">Start a Mock Seating Chart</a>
+        <a class="btn btn-belle-outline" asp-page="/PnmInformation">View PNM Information</a>
+    </p>
+</div>
+
+<div class="divider-flourish">&#10052;</div>
+
+<div class="row g-4">
+    <div class="col-12 col-sm-6 col-lg-3">
+        <a class="feature-card" asp-page="/SeatingChartGenerator">
+            <span class="feature-icon">&#127908;</span>
+            <h3>Seating Chart Generator</h3>
+            <p>Build mock seating scenarios to practice recruitment conversations before the real thing.</p>
+        </a>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-3">
+        <a class="feature-card" asp-page="/ActiveInformation">
+            <span class="feature-icon">&#128149;</span>
+            <h3>Active Information</h3>
+            <p>Keep member details, assignments, and notes organized in one sweet spot.</p>
+        </a>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-3">
+        <a class="feature-card" asp-page="/PnmInformation">
+            <span class="feature-icon">&#127802;</span>
+            <h3>PNM Information</h3>
+            <p>Track potential new members and everything your team needs to know about them.</p>
+        </a>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-3">
+        <a class="feature-card" asp-page="/GeneralLinks">
+            <span class="feature-icon">&#128220;</span>
+            <h3>General Links</h3>
+            <p>Quick access to the resources, forms, and links your recruitment team relies on.</p>
+        </a>
+    </div>
 </div>
