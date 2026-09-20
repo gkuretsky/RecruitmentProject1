@@ -4,5 +4,46 @@
     ViewData["Title"] = "Mock Seating Chart Generator";
 }
 
-<h1>Mock Seating Chart Generator</h1>
-<p>Use this page to generate mock seating charts.</p>
+<div class="hero-card">
+    <p class="hero-eyebrow">Ole Miss &bull; Recruitment</p>
+    <h1 class="hero-title">Mock Seating Chart Generator</h1>
+</div>
+
+<div class="divider-flourish">&#8226;</div>
+
+<div class="panel-card mx-auto">
+    <h2 class="panel-title">Mock Round Information</h2>
+    <form method="post">
+        <div class="row g-4">
+            <div class="col-12 col-md-6">
+                <label asp-for="SelectedRound" class="form-label panel-label">Round</label>
+                <select asp-for="SelectedRound" asp-items="Model.RoundOptions" class="form-select panel-select" required>
+                    <option value="">Choose a round&hellip;</option>
+                </select>
+                <span asp-validation-for="SelectedRound" class="text-danger panel-validation"></span>
+            </div>
+            <div class="col-12 col-md-6">
+                <label asp-for="SelectedPeopleCount" class="form-label panel-label">People</label>
+                <select asp-for="SelectedPeopleCount" asp-items="Model.PeopleCountOptions" class="form-select panel-select" required>
+                    <option value="">Choose a count&hellip;</option>
+                </select>
+                <span asp-validation-for="SelectedPeopleCount" class="text-danger panel-validation"></span>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-belle">Continue</button>
+        </div>
+    </form>
+
+    @if (Model.HasSubmitted)
+    {
+        <div class="panel-summary mt-4">
+            <p><strong>Round:</strong> @Model.SelectedRound</p>
+            <p><strong>People:</strong> @Model.SelectedPeopleCount</p>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
