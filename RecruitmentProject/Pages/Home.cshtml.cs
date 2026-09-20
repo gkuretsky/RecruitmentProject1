@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RecruitmentProject.Pages
 {
-    public class IndexModel : PageModel
+    public class HomeModel : PageModel
     {
         public void OnGet()
         {
