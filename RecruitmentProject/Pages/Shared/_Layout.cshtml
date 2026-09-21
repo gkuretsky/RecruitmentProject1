@@ -41,18 +41,31 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-page="/Privacy"><span class="sidebar-label">Privacy</span></a>
                     </li>
-                    <li class="nav-item">
-                        <form id="logoutForm" class="m-0" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Home", new { area = "" })">
-                            <button type="submit" class="nav-link btn btn-link text-start w-100 border-0 bg-transparent p-0">
-                                <span class="sidebar-label">Log Out (@User.Identity!.Name)</span>
-                            </button>
-                        </form>
-                    </li>
                 </ul>
             </nav>
         }
 
         <div id="page-content-wrapper" class="flex-grow-1">
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <div class="topbar d-flex justify-content-end align-items-center">
+                    <div class="dropdown">
+                        <button class="btn profile-btn dropdown-toggle" type="button" id="profileMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="profile-avatar">@User.Identity!.Name!.Substring(0, 1).ToUpper()</span>
+                            <span class="profile-name">@User.Identity!.Name</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end profile-dropdown-menu" aria-labelledby="profileMenuButton">
+                            <li><a class="dropdown-item" asp-area="" asp-page="/Profile">Edit Profile</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li>
+                                <form id="logoutForm" class="m-0" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Home", new { area = "" })">
+                                    <button type="submit" class="dropdown-item">Log Out</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            }
             <div class="container-fluid">
                 <main role="main" class="pb-3 pt-3">
                     @RenderBody()

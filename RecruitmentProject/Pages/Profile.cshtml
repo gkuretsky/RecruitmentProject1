@@ -1,0 +1,43 @@
+@page
+@model RecruitmentProject.Pages.ProfileModel
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<div class="hero-card">
+    <p class="hero-eyebrow">Ole Miss &bull; Recruitment</p>
+    <h1 class="hero-title">Edit Your Profile</h1>
+    <p class="hero-subtitle">Update your username and email address.</p>
+</div>
+
+<div class="divider-flourish">&#8226;</div>
+
+@if (!string.IsNullOrEmpty(Model.StatusMessage))
+{
+    <div class="alert alert-success mx-auto" style="max-width: 480px;" role="alert">
+        @Model.StatusMessage
+    </div>
+}
+
+<div class="panel-card mx-auto" style="max-width: 480px;">
+    <form method="post">
+        <div asp-validation-summary="All" class="text-danger panel-validation"></div>
+        <div class="mb-3">
+            <label asp-for="Input.Username" class="form-label panel-label"></label>
+            <input asp-for="Input.Username" class="form-control panel-select" autocomplete="username" />
+            <span asp-validation-for="Input.Username" class="text-danger panel-validation"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Input.Email" class="form-label panel-label"></label>
+            <input asp-for="Input.Email" class="form-control panel-select" autocomplete="email" />
+            <span asp-validation-for="Input.Email" class="text-danger panel-validation"></span>
+        </div>
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-belle">Save changes</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
