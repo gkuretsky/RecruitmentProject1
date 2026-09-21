@@ -348,6 +348,26 @@ body {
   font-size: 0.85rem;
 }
 
+/* Auth forms (Login/Register/Forgot/Reset password) */
+.panel-card .form-check-label {
+  color: var(--plum-text);
+  font-weight: 600;
+}
+
+.panel-card .form-check-input:checked {
+  background-color: var(--wine);
+  border-color: var(--wine);
+}
+
+.panel-card a {
+  color: var(--wine);
+  font-weight: 600;
+}
+
+.panel-card a:hover {
+  color: var(--plum-text);
+}
+
 .panel-summary {
   background-color: var(--cream);
   border: 1px solid var(--gold-soft);
@@ -361,4 +381,41 @@ body {
 
 .panel-summary p:last-child {
   margin-bottom: 0;
+}
+
+/* Full-page auth shell (Login / Register / Forgot / Reset password, etc.) */
+.auth-shell {
+  min-height: calc(100vh - 60px - 4rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  background: var(--sidebar-gradient);
+  border-radius: 1.5rem;
+}
+
+.auth-shell-inner {
+  width: 100%;
+  max-width: 30rem;
+}
+
+.auth-shell .hero-card {
+  background-color: #ffffff;
+  margin-bottom: 2rem;
+  padding: 2.25rem 2rem;
+}
+
+.auth-shell .hero-title {
+  font-size: 2.25rem;
+  margin: 0.35rem 0 0.5rem;
+}
+
+.auth-shell .hero-subtitle {
+  font-size: 1rem;
+  max-width: none;
+}
+
+.auth-shell .panel-card {
+  max-width: none;
+  padding: 2.25rem;
 }

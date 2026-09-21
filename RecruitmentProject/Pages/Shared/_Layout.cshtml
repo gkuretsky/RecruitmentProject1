@@ -14,33 +14,43 @@
 </head>
 <body>
     <div class="d-flex" id="wrapper">
-        <nav class="sidebar collapsed" id="sidebar">
-            <div class="sidebar-header d-flex align-items-center p-3">
-                <button class="btn btn-sm sidebar-toggle-btn flex-shrink-0" id="sidebarToggle" type="button" aria-label="Toggle sidebar" onclick="toggleAppSidebar()">
-                    <span>&#9776;</span>
-                </button>
-            </div>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-page="/Index"><span class="sidebar-label">Home</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-page="/SeatingChartGenerator"><span class="sidebar-label">Mock Seating Chart Generator</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-page="/ActiveInformation"><span class="sidebar-label">Active Information</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-page="/PnmInformation"><span class="sidebar-label">PNM Information</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-page="/GeneralLinks"><span class="sidebar-label">General Links</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-page="/Privacy"><span class="sidebar-label">Privacy</span></a>
-                </li>
-            </ul>
-        </nav>
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <nav class="sidebar collapsed" id="sidebar">
+                <div class="sidebar-header d-flex align-items-center p-3">
+                    <button class="btn btn-sm sidebar-toggle-btn flex-shrink-0" id="sidebarToggle" type="button" aria-label="Toggle sidebar" onclick="toggleAppSidebar()">
+                        <span>&#9776;</span>
+                    </button>
+                </div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-page="/Home"><span class="sidebar-label">Home</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-page="/SeatingChartGenerator"><span class="sidebar-label">Mock Seating Chart Generator</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-page="/ActiveInformation"><span class="sidebar-label">Active Information</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-page="/PnmInformation"><span class="sidebar-label">PNM Information</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-page="/GeneralLinks"><span class="sidebar-label">General Links</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-page="/Privacy"><span class="sidebar-label">Privacy</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <form id="logoutForm" class="m-0" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Home", new { area = "" })">
+                            <button type="submit" class="nav-link btn btn-link text-start w-100 border-0 bg-transparent p-0">
+                                <span class="sidebar-label">Log Out (@User.Identity!.Name)</span>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        }
 
         <div id="page-content-wrapper" class="flex-grow-1">
             <div class="container-fluid">

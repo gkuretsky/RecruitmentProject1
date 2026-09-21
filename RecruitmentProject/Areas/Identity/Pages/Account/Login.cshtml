@@ -1,0 +1,47 @@
+@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<div class="auth-shell">
+    <div class="auth-shell-inner">
+        <div class="hero-card">
+            <p class="hero-eyebrow">Ole Miss &bull; Recruitment</p>
+            <h1 class="hero-title">Welcome Back</h1>
+        </div>
+
+        <div class="panel-card">
+            <form id="account" method="post">
+                <div asp-validation-summary="All" class="text-danger panel-validation"></div>
+                <div class="mb-3">
+                    <label asp-for="Input.Email" class="form-label panel-label"></label>
+                    <input asp-for="Input.Email" class="form-control panel-select" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                    <span asp-validation-for="Input.Email" class="text-danger panel-validation"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Input.Password" class="form-label panel-label"></label>
+                    <input asp-for="Input.Password" class="form-control panel-select" autocomplete="current-password" aria-required="true" placeholder="Password" />
+                    <span asp-validation-for="Input.Password" class="text-danger panel-validation"></span>
+                </div>
+                <div class="mb-3 form-check">
+                    <input class="form-check-input" asp-for="Input.RememberMe" />
+                    <label asp-for="Input.RememberMe" class="form-check-label"></label>
+                </div>
+                <div class="text-center mt-4">
+                    <button id="login-submit" type="submit" class="btn btn-belle">Log in</button>
+                </div>
+            </form>
+            <p class="text-center mt-3">
+                <a asp-page="./ForgotPassword">Forgot your password?</a>
+            </p>
+            <p class="text-center">
+                New here? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Create an account</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
