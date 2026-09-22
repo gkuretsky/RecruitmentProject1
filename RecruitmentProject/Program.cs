@@ -29,6 +29,14 @@ builder.Services.AddAuthorization(options =>
 
 var app = builder.Build();
 
+// Automatically apply any pending EF Core migrations on startup so deployments
+// (e.g. IIS) always have an up-to-date database schema without manual steps.
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    dbContext.Database.Migrate();
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -37,7 +45,12 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+// Only force HTTPS redirection when an HTTPS binding actually exists (e.g. local Kestrel dev profiles).
+// The IIS deployment for this app currently uses an HTTP-only binding, so redirecting to HTTPS would break every request.
+if (app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseRouting();
 
