@@ -7,7 +7,7 @@
 <div class="hero-card">
     <p class="hero-eyebrow">Ole Miss &bull; Recruitment</p>
     <h1 class="hero-title">Edit Your Profile</h1>
-    <p class="hero-subtitle">Update your username and email address.</p>
+    <p class="hero-subtitle">Update your account and member information.</p>
 </div>
 
 <div class="divider-flourish">&#8226;</div>
@@ -19,19 +19,75 @@
     </div>
 }
 
-<div class="panel-card mx-auto" style="max-width: 480px;">
-    <form method="post">
+<div class="panel-card mx-auto" style="max-width: 760px;">
+    <form method="post" enctype="multipart/form-data">
         <div asp-validation-summary="All" class="text-danger panel-validation"></div>
-        <div class="mb-3">
-            <label asp-for="Input.Username" class="form-label panel-label"></label>
-            <input asp-for="Input.Username" class="form-control panel-select" autocomplete="username" />
-            <span asp-validation-for="Input.Username" class="text-danger panel-validation"></span>
+
+        <div class="text-center mb-4">
+            @if (!string.IsNullOrEmpty(Model.ProfilePictureUrl))
+            {
+                <img src="@Model.ProfilePictureUrl" alt="Profile picture" class="profile-picture-preview" id="profilePicturePreview" />
+            }
+            else
+            {
+                <div class="profile-picture-placeholder" id="profilePicturePreview">@Model.Input.Username.Substring(0, 1).ToUpper()</div>
+            }
+            <div class="mt-2">
+                <button type="button" class="btn btn-belle-outline" id="uploadPictureBtn" onclick="document.getElementById('profilePictureInput').click();">Update Profile Picture</button>
+                <span id="profilePictureFileName" class="d-block small text-muted mt-1"></span>
+            </div>
+            <input asp-for="Input.ProfilePicture" type="file" accept="image/*" class="d-none" id="profilePictureInput" />
+            <span asp-validation-for="Input.ProfilePicture" class="text-danger panel-validation d-block"></span>
         </div>
-        <div class="mb-3">
-            <label asp-for="Input.Email" class="form-label panel-label"></label>
-            <input asp-for="Input.Email" class="form-control panel-select" autocomplete="email" />
-            <span asp-validation-for="Input.Email" class="text-danger panel-validation"></span>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label asp-for="Input.Username" class="form-label panel-label"></label>
+                    <input asp-for="Input.Username" class="form-control panel-select" autocomplete="username" />
+                    <span asp-validation-for="Input.Username" class="text-danger panel-validation"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Input.Email" class="form-label panel-label"></label>
+                    <input asp-for="Input.Email" class="form-control panel-select" autocomplete="email" />
+                    <span asp-validation-for="Input.Email" class="text-danger panel-validation"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Input.PhoneNumber" class="form-label panel-label"></label>
+                    <input asp-for="Input.PhoneNumber" class="form-control panel-select" autocomplete="tel" placeholder="(555) 555-5555" />
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger panel-validation"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Input.MemberClass" class="form-label panel-label"></label>
+                    <input asp-for="Input.MemberClass" class="form-control panel-select" placeholder="e.g. Fall 2024" />
+                    <span asp-validation-for="Input.MemberClass" class="text-danger panel-validation"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label asp-for="Input.Classification" class="form-label panel-label"></label>
+                    <select asp-for="Input.Classification" class="form-select panel-select">
+                        <option value="">Select classification</option>
+                        @foreach (var option in RecruitmentProject.Pages.ProfileModel.ClassificationOptions)
+                        {
+                            <option value="@option">@option</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Input.Classification" class="text-danger panel-validation"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Input.Major" class="form-label panel-label"></label>
+                    <input asp-for="Input.Major" class="form-control panel-select" placeholder="e.g. Accountancy" />
+                    <span asp-validation-for="Input.Major" class="text-danger panel-validation"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Input.Hometown" class="form-label panel-label"></label>
+                    <input asp-for="Input.Hometown" class="form-control panel-select" placeholder="e.g. Oxford, MS" />
+                    <span asp-validation-for="Input.Hometown" class="text-danger panel-validation"></span>
+                </div>
+            </div>
         </div>
+
         <div class="text-center mt-4">
             <button type="submit" class="btn btn-belle">Save changes</button>
         </div>
@@ -40,4 +96,27 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.getElementById('profilePictureInput').addEventListener('change', function (e) {
+            const file = e.target.files && e.target.files[0];
+            const fileNameEl = document.getElementById('profilePictureFileName');
+            if (!file) {
+                fileNameEl.textContent = '';
+                return;
+            }
+            fileNameEl.textContent = file.name;
+
+            const reader = new FileReader();
+            reader.onload = function (evt) {
+                const preview = document.getElementById('profilePicturePreview');
+                const img = document.createElement('img');
+                img.src = evt.target.result;
+                img.alt = 'Profile picture';
+                img.className = 'profile-picture-preview';
+                img.id = 'profilePicturePreview';
+                preview.replaceWith(img);
+            };
+            reader.readAsDataURL(file);
+        });
+    </script>
 }

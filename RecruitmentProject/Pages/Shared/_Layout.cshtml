@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Identity.UserManager<RecruitmentProject.Data.ApplicationUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -48,10 +49,18 @@
         <div id="page-content-wrapper" class="flex-grow-1">
             @if (User.Identity?.IsAuthenticated == true)
             {
+                var currentUser = await UserManager.GetUserAsync(User);
                 <div class="topbar d-flex justify-content-end align-items-center">
                     <div class="dropdown">
                         <button class="btn profile-btn dropdown-toggle" type="button" id="profileMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="profile-avatar">@User.Identity!.Name!.Substring(0, 1).ToUpper()</span>
+                            @if (!string.IsNullOrEmpty(currentUser?.ProfilePicturePath))
+                            {
+                                <img src="@currentUser.ProfilePicturePath" alt="Profile picture" class="profile-avatar-img" />
+                            }
+                            else
+                            {
+                                <span class="profile-avatar">@User.Identity!.Name!.Substring(0, 1).ToUpper()</span>
+                            }
                             <span class="profile-name">@User.Identity!.Name</span>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end profile-dropdown-menu" aria-labelledby="profileMenuButton">

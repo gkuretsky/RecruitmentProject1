@@ -6,16 +6,17 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using RecruitmentProject.Data;
 
 namespace RecruitmentProject.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class ForgotPasswordModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly IEmailSender<IdentityUser> _emailSender;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IEmailSender<ApplicationUser> _emailSender;
 
-        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IEmailSender<IdentityUser> emailSender)
+        public ForgotPasswordModel(UserManager<ApplicationUser> userManager, IEmailSender<ApplicationUser> emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

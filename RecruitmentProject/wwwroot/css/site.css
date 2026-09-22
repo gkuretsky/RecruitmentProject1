@@ -483,3 +483,35 @@ body {
   background-color: var(--powder-blue);
   color: var(--plum-text);
 }
+
+/* Profile picture (Edit Profile page + topbar avatar) */
+.profile-picture-preview {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--gold-soft);
+  box-shadow: 0 6px 18px rgba(91, 68, 87, 0.15);
+}
+
+.profile-picture-placeholder {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  background-color: var(--wine);
+  color: #ffffff;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+.profile-avatar-img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
