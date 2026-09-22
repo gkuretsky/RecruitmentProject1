@@ -48,22 +48,27 @@
                     <span asp-validation-for="Input.Username" class="text-danger panel-validation"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="Input.Email" class="form-label panel-label"></label>
-                    <input asp-for="Input.Email" class="form-control panel-select" autocomplete="email" />
-                    <span asp-validation-for="Input.Email" class="text-danger panel-validation"></span>
-                </div>
-                <div class="mb-3">
                     <label asp-for="Input.PhoneNumber" class="form-label panel-label"></label>
                     <input asp-for="Input.PhoneNumber" class="form-control panel-select" autocomplete="tel" placeholder="(555) 555-5555" />
                     <span asp-validation-for="Input.PhoneNumber" class="text-danger panel-validation"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="Input.MemberClass" class="form-label panel-label"></label>
-                    <input asp-for="Input.MemberClass" class="form-control panel-select" placeholder="e.g. Fall 2024" />
+                    <input asp-for="Input.MemberClass" class="form-control panel-select" placeholder="e.g. MC '23" />
                     <span asp-validation-for="Input.MemberClass" class="text-danger panel-validation"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Input.Hometown" class="form-label panel-label"></label>
+                    <input asp-for="Input.Hometown" class="form-control panel-select" placeholder="e.g. Oxford, MS" />
+                    <span asp-validation-for="Input.Hometown" class="text-danger panel-validation"></span>
                 </div>
             </div>
             <div class="col-md-6">
+                <div class="mb-3">
+                    <label asp-for="Input.Email" class="form-label panel-label"></label>
+                    <input asp-for="Input.Email" class="form-control panel-select" autocomplete="email" />
+                    <span asp-validation-for="Input.Email" class="text-danger panel-validation"></span>
+                </div>
                 <div class="mb-3">
                     <label asp-for="Input.Classification" class="form-label panel-label"></label>
                     <select asp-for="Input.Classification" class="form-select panel-select">
@@ -79,11 +84,6 @@
                     <label asp-for="Input.Major" class="form-label panel-label"></label>
                     <input asp-for="Input.Major" class="form-control panel-select" placeholder="e.g. Accountancy" />
                     <span asp-validation-for="Input.Major" class="text-danger panel-validation"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="Input.Hometown" class="form-label panel-label"></label>
-                    <input asp-for="Input.Hometown" class="form-control panel-select" placeholder="e.g. Oxford, MS" />
-                    <span asp-validation-for="Input.Hometown" class="text-danger panel-validation"></span>
                 </div>
             </div>
         </div>
